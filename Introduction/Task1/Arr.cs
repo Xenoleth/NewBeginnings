@@ -3,9 +3,9 @@ using Task1.Models;
 
 namespace Task1
 {
-    public class Arr
+    public class Arr<T>
     {
-        private Employee[] _employees;
+        private T[] _employees;
 
         private int _capacity;
         private int _index;
@@ -14,12 +14,12 @@ namespace Task1
         {
             _index = 0;
             _capacity = 1;
-            _employees = new Employee[_capacity];
+            _employees = new T[_capacity];
         }
 
         public int Length => _index;
         
-        public void Add(Employee employee)
+        public void Add(T employee)
         {
             if (_capacity == _index)
             {
@@ -30,7 +30,7 @@ namespace Task1
             _index++;
         }
 
-        public Employee GetByIndex(int index)
+        public T GetByIndex(int index)
         {
             if (index > _index)
             {
@@ -43,14 +43,14 @@ namespace Task1
         private void EnlargeArray()
         {
             _capacity *= 2;
-            Employee[] newEmployees = new Employee[_capacity];
+            T[] newEmployees = new T[_capacity];
 
             CopyArray(_employees, newEmployees);
 
             _employees = newEmployees;
         }
 
-        private void CopyArray(Employee[] source, Employee[] destination)
+        private void CopyArray(T[] source, T[] destination)
         {
             for (int i = 0; i < source.Length; i++)
             {

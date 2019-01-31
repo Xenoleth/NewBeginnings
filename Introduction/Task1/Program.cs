@@ -7,7 +7,7 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            Arr employees = new Arr();
+            Arr<Employee> employees = new Arr<Employee>();
             Console.WriteLine(employees.ToString());
 
             bool open = true;
