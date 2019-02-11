@@ -3,36 +3,49 @@ using Task1.Models;
 
 namespace Task1
 {
-    public class Arr<T>
+    public class List<T> : ICollection<T>
     {
         private T[] _employees;
 
         private int _capacity;
-        private int _index;
+        private int _count;
 
-        public Arr()
+        public List()
         {
-            _index = 0;
+            _count = 0;
             _capacity = 1;
             _employees = new T[_capacity];
         }
 
-        public int Length => _index;
-        
+        public int Count => _count;
+        //public int Count
+        //{
+        //    get
+        //    {
+        //        return _count;
+        //    }
+        //}
+
+        public T this[int i]
+        {
+            get { return _employees[i]; }
+            set { _employees[i] = value; }
+        }
+
         public void Add(T employee)
         {
-            if (_capacity == _index)
+            if (_capacity == _count)
             {
                 EnlargeArray();
             }
 
-            _employees[_index] = employee;
-            _index++;
+            _employees[_count] = employee;
+            _count++;
         }
 
         public T GetByIndex(int index)
         {
-            if (index > _index)
+            if (index > _count)
             {
                 throw new Exception("Index out of bounds of array.");
             }
