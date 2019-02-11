@@ -40,7 +40,7 @@ namespace Task1
             Console.WriteLine("Enter department name:");
             string department = Console.ReadLine();
 
-            ICollection<Employee> employeesInDepartemntIt = GetEmployeesByDepartment(employees, HasAge, 5);
+            ICollection<Employee> employeesInDepartemntIt = GetEmployees<Employee, int>(employees, e => e.Department == "IT");
 
             for (int i = 0; i < employeesInDepartemntIt.Count; i++)
             {
@@ -50,34 +50,34 @@ namespace Task1
             Console.ReadLine();
         }
 
-        public static bool IsDepartment(Employee employee, string department)
-        {
-            return employee.Department == department;
-        }
+        //public static bool IsDepartment(Employee employee, string department)
+        //{
+        //    return employee.Department == department;
+        //}
 
-        public static bool HasName(Employee employee, string name)
-        {
-            return employee.Name == name;
-        }
+        //public static bool HasName(Employee employee, string name)
+        //{
+        //    return employee.Name == name;
+        //}
 
-        public static bool HasAge(Employee employee, int age123)
-        {
-            return employee.Age == age123;
-        }
+        //public static bool HasAge(Employee employee, int age123)
+        //{
+        //    return employee.Age == age123;
+        //}
 
-        public static string Name(Employee employee, string name)
-        {
-            return employee.Name;
-        }
+        //public static string Name(Employee employee, string name)
+        //{
+        //    return employee.Name;
+        //}
 
-        public delegate bool MyPredicate<T>(Employee employee, T value);
+        //public delegate bool MyPredicate<T>(Employee employee, T value);
 
-        public static ICollection<T> GetEmployeesByDepartment<T, U>(ICollection<T> employees, MyPredicate<U> predicate, U value) where T : Employee
+        public static ICollection<T> GetEmployees<T, U>(ICollection<T> employees, Func<T, bool> predicate)
         {
             ICollection<T> employeesInDepartemntIt = new List<T>();
             for (int i = 0; i < employees.Count; i++)
             {
-                if (predicate(employees[i], value))
+                if (predicate(employees[i]))
                 {
                     employeesInDepartemntIt.Add(employees[i]);
                 }
@@ -90,6 +90,25 @@ namespace Task1
 
             return employeesInDepartemntIt;
         }
+
+        //public static ICollection<T> GetEmployees<T, U>(ICollection<T> employees, MyPredicate<U> predicate, U value) where T : Employee
+        //{
+        //    ICollection<T> employeesInDepartemntIt = new List<T>();
+        //    for (int i = 0; i < employees.Count; i++)
+        //    {
+        //        if (predicate(employees[i], value))
+        //        {
+        //            employeesInDepartemntIt.Add(employees[i]);
+        //        }
+        //    }
+
+        //    if (employeesInDepartemntIt.Count == 0)
+        //    {
+        //        throw new Exception("No employees in this department");
+        //    }
+
+        //    return employeesInDepartemntIt;
+        //}
 
         public static Employee GetEmployee()
         {
